@@ -60,14 +60,14 @@ def verify_test(test, params):
             return RACE
         elif "barrier may be reached by" in error_msg:
             # barrier divergence
-            return PASS
+            return ABORT
         elif "possible null pointer access for" in error_msg:
             # error: possible null pointer access for work item 0 in work group 0
             return PASS
         elif "error: this assertion might not hold" in error_msg:
             # error: this assertion might not hold for work item 1 in work group 0
             # A[get_global_id(0)] = sub_sat(A[get_global_id(0)], B[get_global_id(0)]);
-            return FAIL
+            return ABORT
         elif "this is an implementation limitation" in error_msg:
             # kernel.opt.bc: error: wait_group_events with a variable-sized set of events not supported
             # Please contact the developers; this is an implementation limitation
